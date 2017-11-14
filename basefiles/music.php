@@ -1,6 +1,7 @@
 <?php
 //Variables PHP
 $filesAndFolder = File_Find(["files/Musique"], ["mp3"]);
+var_dump($filesAndFolder);
 ?>
 <style>
 /* Fonts */
