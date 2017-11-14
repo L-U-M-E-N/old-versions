@@ -96,7 +96,7 @@ var app = {
             $('#windows-home').css('display','block');
         }
 
-        $(oldWindow).css('display','none');
+        $("#windows-" + oldWindow).css('display','none');
     },
 
     closeWindow: function() {
