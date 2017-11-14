@@ -1,0 +1,120 @@
+/**********************
+        General     
+**********************/
+body {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1a2831+0,0b0c0e+100 */
+    background: #1a2831; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover, #1a2831 0%, #0b0c0e 100%); /* FF3.6-15 */
+    background: -webkit-radial-gradient(center, ellipse cover, #1a2831 0%,#0b0c0e 100%); /* Chrome10-25,Safari5.1-6 */
+    background: radial-gradient(ellipse at center, #1a2831 0%,#0b0c0e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1a2831', endColorstr='#0b0c0e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+
+    color: #DDDDDD;
+
+    font-family: sans-serif;
+}
+
+/**
+ * Menu
+ */
+#menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+#menu li {
+    display: inline-block;
+
+    text-align: center;
+    vertical-align: top;
+}
+
+@media all and (orientation: portrait) {
+    #menu h1 {
+        text-align: center;
+    }
+    #menu li {
+        width: calc((100% / 3) - 20px - 3px);
+        padding: 10px;
+    }
+    #menu-desc {
+        display: block;
+    }
+    #menu li img {
+        width: 100%;
+    }
+    .menu-hided {
+        display: none;
+    }
+}
+@media all and (orientation: landscape) {
+    #menu h1 {
+        margin: 0.5em 1vw;
+        display: inline-block;
+
+        font-size: 1.5em;
+
+        position: fixed;
+        left: 0;
+        top: 0;
+    }
+    #menu li {
+        height: 2.5em;
+        padding: 1vh;
+    }
+    #menu {
+        text-align: right;
+    }
+    #menu-desc {
+        display: none;
+        position: absolute;
+        top: 4em;
+        min-width: 200px;
+        margin-left: calc(1.25em - 100px);
+        text-align: center;
+    }
+    #menu ul {
+        position: fixed;
+        right: 0;
+        top: 0;
+        width: 100%;
+
+        margin-right: 1em;
+    }
+    #menu li img {
+        height: 100%;
+    }
+    #menu li:hover {
+        cursor: pointer;
+    }
+    #menu li:hover #menu-desc {
+        display: block;
+    }
+}
+
+#menu .active {
+    background-color: rgba(255,255,255,0.15);
+}
+
+/**
+ * Windows
+ */
+#windows div {
+    background-color: rgba(255,255,255,0.15);
+    width: 100vw;
+    height: calc(100vh - 2.5em - 2%);
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
+    display: none;
+}
+#windows-home {
+    background-color: transparent !important;
+}
