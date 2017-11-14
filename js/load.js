@@ -68,10 +68,6 @@ var app = {
                 default:
             }
 
-            console.log(id);
-            console.log("#windows-" + id);
-            console.info($("#windows-" + id));
-
             if(replace && url !="") {
                 $("#windows-" + id).html("<iframe id=\"window-frame\" src=\""+url+"\"></iframe>");
             } else if(url !="") {
@@ -83,6 +79,7 @@ var app = {
 
     openWindow: function(id) {
         id = id.substr(5);
+        var oldWindow = this.currentWindow;
 
         var same = false;
         if(this.currentWindow==id) {
@@ -92,17 +89,14 @@ var app = {
             this.currentWindow = id;      
         }
 
-        windowList=$('#windows *');
-
-        for(var i=0; i<windowList.length; i++) {
-            $(windowList[i]).css('display','none');
-        }
         if(!same) {
-           $('#windows-' + id).css('display','block');
            this.openProgram(id);
+           $('#windows-' + id).css('display','block');
         } else {
             $('#windows-home').css('display','block');
         }
+
+        $(oldWindow).css('display','none');
     },
 
     closeWindow: function() {
