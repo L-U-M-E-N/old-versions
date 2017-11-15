@@ -138,6 +138,9 @@ body {
     #menu li:hover #menu-desc {
         display: block;
     }
+    #hamburger {
+        display: none;
+    }
 }
 
 #menu .active {
