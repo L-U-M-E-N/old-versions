@@ -37,6 +37,13 @@ body {
 @media all and (orientation: portrait) {
     #menu {
         display: none;
+
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1a2831+0,0b0c0e+100 */
+        background: #1a2831; /* Old browsers */
+        background: -moz-radial-gradient(center, ellipse cover, #1a2831 0%, #0b0c0e 100%); /* FF3.6-15 */
+        background: -webkit-radial-gradient(center, ellipse cover, #1a2831 0%,#0b0c0e 100%); /* Chrome10-25,Safari5.1-6 */
+        background: radial-gradient(ellipse at center, #1a2831 0%,#0b0c0e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1a2831', endColorstr='#0b0c0e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
     }
     #menu h1 {
         text-align: center;
@@ -163,6 +170,8 @@ body {
     left: 0;
 
     display: none;
+
+    z-index: -1;
 }
 #windows-home {
     background-color: transparent !important;
@@ -171,4 +180,4 @@ body {
     width: 100%;
     height: 100%;
     border: none;
-}
+} 
