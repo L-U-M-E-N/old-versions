@@ -8,9 +8,10 @@ var app = {
     		// Menu
 			$('#menu ul li').click(function() {
 				app.openWindow($(this).attr('id'));
-                CloseMenu();
-
+                
                 $('#menu .active').removeClass('active');
+
+                CloseMenu();
 
                 if(app.currentWindow==$(this).attr('id').substr(5)) {
                     $(this).addClass('active');
