@@ -35,6 +35,9 @@ body {
 }
 
 @media all and (orientation: portrait) {
+    #menu {
+        display: none;
+    }
     #menu h1 {
         text-align: center;
     }

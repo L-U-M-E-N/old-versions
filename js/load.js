@@ -8,8 +8,7 @@ var app = {
     		// Menu
 			$('#menu ul li').click(function() {
 				app.openWindow($(this).attr('id'));
-                $('#menu').addClass('.menu-hided');
-                $('#hamburger').removeClass('.hamburger-hided');
+                CloseMenu();
 
                 $('#menu .active').removeClass('active');
 
@@ -19,11 +18,6 @@ var app = {
 			});
 
             $('#windows-home').css('display','block');
-
-            $('#hamburger').click(function() {
-                $('#menu').removeClass('.menu-hided');
-                $('#hamburger').addClass('.hamburger-hided');
-            });
    		});
     },
 
