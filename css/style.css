@@ -48,8 +48,51 @@ body {
     #menu li img {
         width: 100%;
     }
-    .menu-hided {
-        display: none;
+    
+    #hamburger {
+        display: block;
+        position: fixed;
+        z-index: 6;
+        top: 0;
+        left: 0;
+        margin: 5px;
+        width: 12%;
+    }
+
+    /* Animate on Open */
+    @-webkit-keyframes openMenu { from { width: 1px; height: 1px; opacity: 0; } to { width: 100%; height: 100%; opacity: 1; }  }
+    @-moz-keyframes openMenu { from { width: 1px; height: 1px; opacity: 0; } to { width: 100%; height: 100%; opacity: 1; }  }
+    @-o-keyframes openMenu { from { width: 1px; height: 1px; opacity: 0; } to { width: 100%; height: 100%; opacity: 1; }  }
+    @keyframes openMenu { from { width: 1px; height: 1px; opacity: 0; } to { width: 100%; height: 100%; opacity: 1; }  }
+
+    @-webkit-keyframes closeMenu { from { width: 100%; height: 100%; opacity: 1; } to { width: 1px; height: 1px; opacity: 0; }  }
+    @-moz-keyframes closeMenu { from { width: 100%; height: 100%; opacity: 1; } to { width: 1px; height: 1px; opacity: 0; }  }
+    @-o-keyframes closeMenu { from { width: 100%; height: 100%; opacity: 1; } to { width: 1px; height: 1px; opacity: 0; }  }
+    @keyframes closeMenu { from { width: 100%; height: 100%; opacity: 1; } to { width: 1px; height: 1px; opacity: 0; }  }
+
+    .menu {
+        display: block !important;
+        /* Animate on Open */
+        -webkit-animation-name: openMenu;
+        -webkit-animation-duration: 1.5s; 
+        -moz-animation-name: openMenu;
+        -moz-animation-duration: 1.5s; 
+        -o-animation-name: openMenu;
+        -o-animation-duration: 1.5s; 
+        animation-name: openMenu;
+        animation-duration: 1.5s;
+    }
+    .menu-bye {
+        display: block !important;
+        /* Animate on Close */
+        -webkit-animation-name: closeMenu;
+        -webkit-animation-duration: 1.5s;
+        -moz-animation-name: closeMenu;
+        -moz-animation-duration: 1.5s; 
+        -o-animation-name: closeMenu;
+        -o-animation-duration: 1.5s;
+        animation-name: closeMenu;
+        animation-duration: 1.5s;
     }
 }
 @media all and (orientation: landscape) {

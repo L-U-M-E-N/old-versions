@@ -6,6 +6,8 @@
         <title>Elanis WebOS</title>
     </head>
     <body>
+        <img id="hamburger" src="https://03.cdn.elanis.eu/website/img/hamburger.png" alt="menu">
+        
     	<section id="menu">
     		<h1>Menu</h1>
     		<ul>
