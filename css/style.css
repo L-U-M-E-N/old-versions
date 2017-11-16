@@ -22,6 +22,9 @@ body {
 /**
  * Menu
  */
+#menu {
+    z-index: 1;
+}
 #menu ul {
     list-style: none;
     padding: 0;
@@ -170,8 +173,6 @@ body {
     left: 0;
 
     display: none;
-
-    z-index: -1;
 }
 #windows-home {
     background-color: transparent !important;
