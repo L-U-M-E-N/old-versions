@@ -1,4 +1,9 @@
 <?php
+if(!isset($_SESSION['connected']) || $_SESSION['connected'] != true) {
+	header('Location: login');
+	die();
+}
+
 // Verif du client sur mongo
 $manager = new MongoDB\Driver\Manager("mongodb://mongo-server:27017");
 

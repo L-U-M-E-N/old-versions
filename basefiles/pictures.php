@@ -1,3 +1,10 @@
+<?php
+if(!isset($_SESSION['connected']) || $_SESSION['connected'] != true) {
+	header('Location: login');
+	die();
+}
+?>
+
 <style type="text/css">
 	#image-full-div {
 		position: fixed;
