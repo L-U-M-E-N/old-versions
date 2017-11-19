@@ -1,7 +1,12 @@
 <?php
+if(!isset($_SESSION['connected']) || $_SESSION['connected'] != true) {
+	header('Location: login');
+	die();
+}
+
 $services = [
 	["Apache","Proxy reverse","***REMOVED***",80],
-	["Apache","Portfolio","***REMOVED***",401],
+	["Apache","Portfolio","172.17.0.1",401],
 	["Apache","Gaspar","***REMOVED***",402],
 	["Apache","Getiny.link","***REMOVED***",403],
 	["Apache","Dev42","***REMOVED***",404],
