@@ -85,6 +85,7 @@ $results = $cursor->toArray();
 		$content = [
 			["Tout",""],
 			["Assistant personnel","***REMOVED***"],
+			["Dehash","***REMOVED***"],
 			["Galactae (Site)","***REMOVED***"],
 			["Galactae (Client de jeu)","Galactae (Client)"],
 			["Gaspar","https://gaspar.ovh"],
@@ -154,6 +155,7 @@ $results = $cursor->toArray();
 					visits[i]["url"] = visits[i]["url"].replace("http://liink","***REMOVED***");
 					visits[i]["url"] = visits[i]["url"].replace("http://scifi","***REMOVED***");
 					visits[i]["url"] = visits[i]["url"].replace("http://assistant_personnel","***REMOVED***");
+					visits[i]["url"] = visits[i]["url"].replace("http://dehash-me","***REMOVED***");
 
 					if(visits[i]["url"].substr(0,16)=="http://galactae-") {
 						visits[i]["url"] = "Galactae (Client)";
@@ -171,6 +173,7 @@ $results = $cursor->toArray();
 					visits[i]["origin"] = visits[i]["origin"].replace("http://liink","***REMOVED***");
 					visits[i]["origin"] = visits[i]["origin"].replace("http://scifi","https://scifi.elanistudio.eu");
 					visits[i]["origin"] = visits[i]["origin"].replace("http://assistant_personnel","***REMOVED***");
+					visits[i]["origin"] = visits[i]["origin"].replace("http://dehash-me","***REMOVED***");
 
 					visits[i]["origin"] = visits[i]["origin"].replace("assistant.elanistudio.eu","webos.elanis.eu");
 					visits[i]["origin"] = visits[i]["origin"].replace("spacegame.elanistudio.eu","galactae.eu");
