@@ -9,7 +9,7 @@ $manager = new MongoDB\Driver\Manager("***REMOVED***");
 
 $filter = array();
 $options = [
-    'limit' => 40000,
+    'limit' => 35000,
     'sort' => ['_id' => -1],
 ];
 
