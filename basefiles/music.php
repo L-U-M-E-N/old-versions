@@ -272,6 +272,7 @@ function Load() {
 	$('#playlist-random').click(function() {
 		playlistRandom = !playlistRandom;
 		if(playlistRandom) {
+			scramblePlaylist()
 			$('#playlist-random').css('color','red');
 		} else {
 			$('#playlist-random').css('color','white');
