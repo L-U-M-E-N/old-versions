@@ -146,6 +146,8 @@ function scramblePlaylist() {
         x = playlistSrc[i];
         playlistSrc[i] = playlistSrc[j];
         playlistSrc[j] = x; 
+
+        if(i==playlistCurrent) { playlistCurrent=j; }
     }
 }
 function ChangeMusic() {
@@ -288,15 +290,7 @@ function Load() {
 
 			// Scramble order
 			scramblePlaylist();
-
-			// Then find current playing music
-			for(var i in playlist) {
-				if(playlist[i] == orderedPlaylist[playlistCurrent]) {
-					playlistCurrent = i;
-					break;
-				}
-			}
-
+			
 			// And draw this new order
 			drawPlaylist();
 		} else {
