@@ -201,8 +201,8 @@ function addMusic(albumID,musicID) {
 		orderedPlaylist.push(musiclist[albumID][musicID]);
 		orderedPlaylistSrc.push(albumlist[albumID] + "/" + musiclist[albumID][musicID]);	
 
-		playlist = orderedPlaylist;
-		playlistSrc = orderedPlaylistSrc;
+		playlist = orderedPlaylist.slice();
+		playlistSrc = orderedPlaylistSrc.slice();
 
 		if(playlistRandom) {
 			scramblePlaylist();
@@ -289,15 +289,15 @@ function Load() {
 			$('#playlist-random').css('color','red');
 		} else {
 			$('#playlist-random').css('color','white');
-			playlist = orderedPlaylist;
-			playlistSrc = orderedPlaylistSrc;
+			playlist = orderedPlaylist.slice();
+			playlistSrc = orderedPlaylistSrc.slice();
 			drawPlaylist();
 		}
 	});
 	// Clear playlist
 	$('#playlist-clear').click(function() {
-		playlist = [];
-		playlistSrc = [];
+		orderedPlaylist = [];
+		orderedPlaylistSrc = [];
 		alreadyAdded = [];
 		drawPlaylist();
 	});
