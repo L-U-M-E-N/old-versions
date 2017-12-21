@@ -107,6 +107,8 @@ var audioobj;
 
 var playlist = [];
 var playlistSrc = []
+var orderedPlaylist = [];
+var orderedPlaylistSrc = [];
 var playlistCurrent = 0;
 var playlistRandom;
 var alreadyAdded = [];
@@ -196,8 +198,11 @@ function addMusic(albumID,musicID) {
 	if(alreadyAdded[albumID][musicID]==undefined) { 
 		alreadyAdded[albumID][musicID] = true;
 
-		playlist.push(musiclist[albumID][musicID]);
-		playlistSrc.push(albumlist[albumID] + "/" + musiclist[albumID][musicID]);	
+		orderedPlaylist.push(musiclist[albumID][musicID]);
+		orderedPlaylistSrc.push(albumlist[albumID] + "/" + musiclist[albumID][musicID]);	
+
+		playlist = orderedPlaylist;
+		playlistSrc = orderedPlaylistSrc;
 
 		if(playlistRandom) {
 			scramblePlaylist();
@@ -284,6 +289,9 @@ function Load() {
 			$('#playlist-random').css('color','red');
 		} else {
 			$('#playlist-random').css('color','white');
+			playlist = orderedPlaylist;
+			playlistSrc = orderedPlaylistSrc;
+			drawPlaylist();
 		}
 	});
 	// Clear playlist
