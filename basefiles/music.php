@@ -221,13 +221,10 @@ function addMusic(albumID,musicID) {
 		orderedPlaylist.push(musiclist[albumID][musicID]);
 		orderedPlaylistSrc.push(albumlist[albumID] + "/" + musiclist[albumID][musicID]);	
 
-		playlist = orderedPlaylist.slice();
-		playlistSrc = orderedPlaylistSrc.slice();
+		orderPlaylist();
 
 		if(playlistRandom) {
 			scramblePlaylist();
-		} else {
-			orderPlaylist();
 		}
 	}
 }
