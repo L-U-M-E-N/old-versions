@@ -20,6 +20,7 @@ body {
 	border-top: 1px inset #aaa;
 	color: white;
 	font-family: 'News Cycle', sans-serif;
+	user-select: none;
 }
 #audio {
 	position: fixed;
