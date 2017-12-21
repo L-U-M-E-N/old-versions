@@ -284,13 +284,37 @@ function Load() {
 	$('#playlist-random').click(function() {
 		playlistRandom = !playlistRandom;
 		if(playlistRandom) {
-			scramblePlaylist();
-			drawPlaylist();
 			$('#playlist-random').css('color','red');
+
+			// Scramble order
+			scramblePlaylist();
+
+			// Then find current playing music
+			for(var i in playlist) {
+				if(playlist[i] == orderedPlaylist[playlistCurrent]) {
+					playlistCurrent = i;
+					break;
+				}
+			}
+
+			// And draw this new order
+			drawPlaylist();
 		} else {
 			$('#playlist-random').css('color','white');
+
+			// Find the current playing music in list
+			for(var i in orderedPlaylist) {
+				if(orderedPlaylist[i] == playlist[playlistCurrent]) {
+					playlistCurrent = i;
+					break;
+				}
+			}
+
+			// Then reset order
 			playlist = orderedPlaylist.slice();
 			playlistSrc = orderedPlaylistSrc.slice();
+			
+			// And draw this new order
 			drawPlaylist();
 		}
 	});
