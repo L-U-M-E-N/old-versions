@@ -134,9 +134,16 @@ function scramblePlaylist() {
 	var j, x;
     for (var i = playlist.length - 1; i > 0; i--) {
         j = Math.floor(Math.random() * (i + 1));
+
+        // Swap titles
         x = playlist[i];
         playlist[i] = playlist[j];
         playlist[j] = x;
+
+        // Swap sources
+        x = playlistSrc[i];
+        playlistSrc[i] = playlistSrc[j];
+        playlistSrc[j] = x; 
     }
 }
 function ChangeMusic() {
@@ -272,7 +279,8 @@ function Load() {
 	$('#playlist-random').click(function() {
 		playlistRandom = !playlistRandom;
 		if(playlistRandom) {
-			scramblePlaylist()
+			scramblePlaylist();
+			drawPlaylist();
 			$('#playlist-random').css('color','red');
 		} else {
 			$('#playlist-random').css('color','white');
