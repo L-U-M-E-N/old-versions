@@ -130,7 +130,15 @@ function drawPlaylist() {
 		audioobj.play();
 	});
 }
-
+function scramblePlaylist() {
+	var j, x;
+    for (var i = playlist.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = playlist[i];
+        playlist[i] = playlist[j];
+        playlist[j] = x;
+    }
+}
 function ChangeMusic() {
 	audioobj.currentTime = 0;
 	audioobj.src = playlistSrc[playlistCurrent];
@@ -138,17 +146,7 @@ function ChangeMusic() {
 	drawPlaylist();
 }
 function NextMusic() {
-	if(!playlistRandom) {
-		playlistCurrent++;
-	} else {
-		var temp = Math.floor(Math.random()*playlist.length);
-
-		if(temp==playlistCurrent) {
-			playlistCurrent++;
-		} else {
-			playlistCurrent = temp;
-		}	
-	}
+	playlistCurrent++;
 
 	if(playlist[playlistCurrent]==undefined) { playlistCurrent = 0; }
 
@@ -157,17 +155,13 @@ function NextMusic() {
 	audioobj.play();
 }
 function PrevMusic() {
-	if(!playlistRandom) {
-		playlistCurrent--;
+	playlistCurrent--;
 
-		if(playlist[playlistCurrent]==undefined) { playlistCurrent = playlist.length-1; }
+	if(playlist[playlistCurrent]==undefined) { playlistCurrent = playlist.length-1; }
 
-		ChangeMusic();
+	ChangeMusic();
 
-		audioobj.play();
-	} else {
-		NextMusic();
-	}
+	audioobj.play();
 }
 
 function DownVolume() {
@@ -196,7 +190,11 @@ function addMusic(albumID,musicID) {
 		alreadyAdded[albumID][musicID] = true;
 
 		playlist.push(musiclist[albumID][musicID]);
-		playlistSrc.push(albumlist[albumID] + "/" + musiclist[albumID][musicID]);
+		playlistSrc.push(albumlist[albumID] + "/" + musiclist[albumID][musicID]);	
+
+		if(playlistRandom) {
+			scramblePlaylist();
+		}
 
 		drawPlaylist();
 	}
