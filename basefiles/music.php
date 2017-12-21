@@ -148,7 +148,25 @@ function scramblePlaylist() {
         playlistSrc[j] = x; 
 
         if(i==playlistCurrent) { playlistCurrent=j; }
+        else if(j==playlistCurrent) { playlistCurrent=i; }
     }
+
+    drawPlaylist();
+}
+function orderPlaylist() {
+	// Find the current playing music in list
+	for(var i in orderedPlaylist) {
+		if(orderedPlaylist[i] == playlist[playlistCurrent]) {
+			playlistCurrent = i;
+			break;
+		}
+	}
+
+	// Then reset order
+	playlist = orderedPlaylist.slice();
+	playlistSrc = orderedPlaylistSrc.slice();
+
+	drawPlaylist();
 }
 function ChangeMusic() {
 	audioobj.currentTime = 0;
@@ -208,9 +226,9 @@ function addMusic(albumID,musicID) {
 
 		if(playlistRandom) {
 			scramblePlaylist();
+		} else {
+			orderPlaylist();
 		}
-
-		drawPlaylist();
 	}
 }
 function drawAlbum(albumID) {
@@ -290,33 +308,22 @@ function Load() {
 
 			// Scramble order
 			scramblePlaylist();
-			
-			// And draw this new order
-			drawPlaylist();
 		} else {
 			$('#playlist-random').css('color','white');
 
-			// Find the current playing music in list
-			for(var i in orderedPlaylist) {
-				if(orderedPlaylist[i] == playlist[playlistCurrent]) {
-					playlistCurrent = i;
-					break;
-				}
-			}
-
-			// Then reset order
-			playlist = orderedPlaylist.slice();
-			playlistSrc = orderedPlaylistSrc.slice();
-			
 			// And draw this new order
-			drawPlaylist();
+			orderPlaylist();
 		}
 	});
 	// Clear playlist
 	$('#playlist-clear').click(function() {
 		orderedPlaylist = [];
 		orderedPlaylistSrc = [];
+		playlist = [];
+		playlistSrc = [];
+
 		alreadyAdded = [];
+
 		drawPlaylist();
 	});
 }
