@@ -195,11 +195,8 @@ $results = $cursor->toArray();
 					if(visits[i]["origin"].substr(0,39)=="https://webcache.googleusercontent.com/") { visits[i]["origin"] = "Google Web Cache"; }
 
 					/* Ip detection */
-					if(visits[i]["ip"]=="***REMOVED***") { 
-						visits[i]["ip"]="Elanis (***REMOVED***)"; 
-					}
-					if(visits[i]["ip"]=="***REMOVED***") { 
-						visits[i]["ip"]="Local (***REMOVED***)"; 
+					if(visits[i]["ip"]=="***REMOVED***" || visits[i]["ip"]=="***REMOVED***" || visits[i]["ip"]=="***REMOVED***" || visits[i]["ip"]=="172.17.0.1" || visits[i]["ip"]=="127.0.0.1") { 
+						visits[i]["ip"]="Elanis"; 
 					}
 
 					/* Ajout aux tableaux */
