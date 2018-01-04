@@ -5,7 +5,7 @@ if(!isset($_SESSION['connected']) || $_SESSION['connected'] != true) {
 }
 
 // Verif du client sur mongo
-$manager = new MongoDB\Driver\Manager("mongodb://mongo-server:27017");
+$manager = new MongoDB\Driver\Manager("mongodb://statalytics:kNBAFqLjCfpBrmX2UQtR6XC4rQLvS9z5MWnzNNpU7QpURsjfhE44Qjf4kHY6bhuAHA7MZxqB@mongo-server:27017");
 
 $filter = array();
 $options = [
