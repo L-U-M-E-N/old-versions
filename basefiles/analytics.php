@@ -195,11 +195,8 @@ $results = $cursor->toArray();
 					if(visits[i]["origin"].substr(0,39)=="https://webcache.googleusercontent.com/") { visits[i]["origin"] = "Google Web Cache"; }
 
 					/* Ip detection */
-					if(visits[i]["ip"]=="88.181.214.139") { 
-						visits[i]["ip"]="Elanis (88.181.214.139)"; 
-					}
-					if(visits[i]["ip"]=="163.172.46.202") { 
-						visits[i]["ip"]="Local (163.172.46.202)"; 
+					if(visits[i]["ip"]=="88.181.214.139" || visits[i]["ip"]=="163.172.87.69" || visits[i]["ip"]=="163.172.46.202" || visits[i]["ip"]=="172.17.0.1" || visits[i]["ip"]=="127.0.0.1") { 
+						visits[i]["ip"]="Elanis"; 
 					}
 
 					/* Ajout aux tableaux */
