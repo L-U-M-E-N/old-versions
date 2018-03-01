@@ -19,6 +19,18 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 
 <style>
 	/**
+	 * Fonts
+	 */
+	@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+	/**
+	 * Main code
+	 */
+	body {
+		background-color: #272727;
+		font-family: 'Montserrat', sans-serif;
+	}
+	/**
 	 * Login
 	 */
 	#login {
