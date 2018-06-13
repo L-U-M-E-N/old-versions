@@ -1,6 +1,6 @@
 <?php
 include('./lib/init.php');
- 
+
 // Cache preparation
 $_SESSION['lang'] = (isset($_SESSION['lang']))?$_SESSION['lang']:'en';
 $_GET['page'] = (isset($_GET['page']))?$_GET['page']:1;
