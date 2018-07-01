@@ -80,9 +80,9 @@ $filesAndFolder = File_Find(["./files/Musique"], ["mp3"]);
         margin-left: 0.5em;
     }
     .album-pic {
-        width: 24%;
+        width: 19%;
 
-        padding-top: calc(24.5% - 0.5rem);
+        padding-top: calc(19.5% - 0.5rem);
         margin: 0.25%;
         border-radius: 1%;
 
