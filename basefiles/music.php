@@ -39,6 +39,7 @@ $filesAndFolder = File_Find(["./files/Musique"], ["mp3"]);
         right: 0;
         height: calc(100% - 54px);
         width: 20%;
+        background-color:  rgb(150,150,150);
         background-color: rgba(150,150,150,0.2);
         border-left: 1px solid #ccc;
         padding: 1rem 0;
@@ -90,6 +91,7 @@ $filesAndFolder = File_Find(["./files/Musique"], ["mp3"]);
 
         background-size: 100%;
         background-repeat: no-repeat;
+        background-color:  rgb(150,150,150);
         background-color: rgba(150,150,150,0.2);
         
         box-sizing: border-box;
@@ -125,7 +127,7 @@ echo "var albumlist = ". $albumlist . ";\n";
     var audioobj;
 
     var playlist = [];
-    var playlistSrc = []
+    var playlistSrc = [];
     var orderedPlaylist = [];
     var orderedPlaylistSrc = [];
     var playlistCurrent = 0;
