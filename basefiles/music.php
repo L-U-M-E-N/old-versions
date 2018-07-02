@@ -59,7 +59,7 @@ $filesAndFolder = File_Find(["./files/Musique"], ["mp3"]);
         list-style: none;
         font-size: 0.9em;
         padding: 10px;
-        height: calc(100% - 54px - 4em);
+        height: calc(100% - 54px - 2.5em);
         overflow: auto;
     }
 
