@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<link rel="stylesheet" type="text/css" href="../css/style.css">
+	</head>
+	<body>
+		<div id="window-bar">
+			<span id="window-title">Projet L.U.M.E.N - Learned United Machines of Elanis Network</span>
+			<span id="window-close-button">✕</span>
+		</div>
+
+		<!-- Grid -->
+		<div class="main"> 	
+			<div class="module module-music">
+				<span id="module-music-more">&equiv;</span>
+
+				<b>Musique</b><br/>
+				<br/>
+				<span id="module-music-album"></span><br/>
+				<img id="module-music-img" src="" onError="this.src='***REMOVED***/_icons/noimage.jpg';"><br/>
+				<span id="module-music-time">0:00/0:00</span><br/>
+				<span id="module-music-title">Playlist vide</span><br/>
+				<span id="module-music-prev">&#9198;</span>
+				<span id="module-music-playPause">&#9654;</span>
+				<span id="module-music-next">&#9197;</span><br/><br/>
+				<span id="module-music-decVol">&#128265;</span>
+				<span id="module-music-volume">50%</span>
+				<span id="module-music-incVol">&#128266;</span><br/>
+
+				<audio id="audio" src="" controls> 
+					Votre navigateur ne supporte pas cette fonction.
+				</audio>
+			</div>
+		
+			<div class="module module-cmd">
+				<b id="module-cmd-title">Commandes</b>
+				<ul>
+
+				</ul>
+				<input type="text" id="module-cmd-input" placeholder="Entrez votre commande">
+			</div>
+
+			<div class="module module-pomodoro">
+				<table>
+					<b>Pomodoro</b><br/>
+					<br/>
+
+					<tr>
+						<td></td>
+						<td></td>
+						<td>% jour</td>
+						<td>% semaine</td>
+						<td>% mois</td>
+					</tr>
+
+					<tr>
+						<td>Travail</td>
+						<td></td>
+						<td rowspan="2" id="module-pomodoro-work-day-percentage">0%</td>
+						<td rowspan="2" id="module-pomodoro-work-week-percentage">0%</td>
+						<td rowspan="2" id="module-pomodoro-work-month-percentage">0%</td>
+					</tr>
+					<tr>
+						<td id="module-pomodoro-work-time">00:00:00</td>
+						<td><span id="module-pomodoro-work">&#9654</span></td>
+					</tr>
+
+					<tr>
+						<td>Jeux</td>
+						<td></td>
+						<td rowspan="2" id="module-pomodoro-game-day-percentage">0%</td>
+						<td rowspan="2" id="module-pomodoro-game-week-percentage">0%</td>
+						<td rowspan="2" id="module-pomodoro-game-month-percentage">0%</td>
+					</tr>
+					<tr>
+						<td id="module-pomodoro-game-time">00:00:00</td>
+						<td><span id="module-pomodoro-game">&#9654</span></td>
+					</tr>
+
+					<tr>
+						<td>Autre</td>
+						<td></td>
+						<td rowspan="2" id="module-pomodoro-other-day-percentage">0%</td>
+						<td rowspan="2" id="module-pomodoro-other-week-percentage">0%</td>
+						<td rowspan="2" id="module-pomodoro-other-month-percentage">0%</td>
+					</tr>
+					<tr>
+						<td id="module-pomodoro-other-time">00:00:00</td>
+						<td><span id="module-pomodoro-other">&#x25b7;</span></td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="module module-pictures">
+				<b>Images</b><br/>
+				<br/>
+			</div> 
+		
+			<div class="module module-videos">
+				<b>Videos</b><br/>
+				<br/>
+			</div>
+
+			<div class="module module-tools">
+				<b>Outils</b><br/>
+				<br/>
+				<img src="../img/tools/devdocs.png"  		id="module-tools-devdocs">
+				<img src="../img/tools/dehash.png"  		id="module-tools-dehash">
+				<img src="../img/tools/galactae.png" 		id="module-tools-galactae">
+				<img src="../img/tools/mongo.png"    		id="module-tools-mongo">
+				<img src="../img/tools/sonar.png"    		id="module-tools-sonar">
+				<img src="../img/tools/howtoopenme.png"    	id="module-tools-howtoopenme">
+				<img src="../img/tools/todoist.png"    		id="module-tools-todoist">
+			</div>
+		</div>
+
+		<script type="text/javascript" src="../js/main.js"></script>
+		<script type="text/javascript" src="../js/windows/index.js"></script>
+		<script type="text/javascript" src="../js/modules/music.js"></script>
+		<script type="text/javascript" src="../js/modules/pomodoro.js"></script>
+		<script type="text/javascript" src="../js/modules/tools.js"></script>
+	</body>
+</html>

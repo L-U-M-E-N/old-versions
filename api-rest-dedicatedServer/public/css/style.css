@@ -1,0 +1,95 @@
+/* SCROLLBAR CUSTOM */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e1e1e;
+  border: 0 none #777777;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #777777;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #979797;
+}
+::-webkit-scrollbar-track {
+  background: #999999;
+  border: 0 none #777777;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #999999;
+}
+::-webkit-scrollbar-track:active {
+  background: #DDDDDD;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/**
+ * Main code
+ */
+body {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1a2831+0,0b0c0e+100 */
+    background: #1a2831; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover, #1a2831 0%, #0b0c0e 100%); /* FF3.6-15 */
+    background: -webkit-radial-gradient(center, ellipse cover, #1a2831 0%,#0b0c0e 100%); /* Chrome10-25,Safari5.1-6 */
+    background: radial-gradient(ellipse at center, #1a2831 0%,#0b0c0e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1a2831', endColorstr='#0b0c0e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+
+    color: #DDDDDD;
+	font-family: 'Montserrat', sans-serif;
+}
+
+/**
+ * Login
+ */
+#login {
+	position: fixed;
+
+	top: calc(50% - 75px);
+	left: calc(50% - 150px);
+
+	width: 300px;
+	height: 150px;
+}
+#login input {
+	display: inline-block;
+
+	/*margin: 0.5em calc((300px - 4px - 1em - 225px)/2); /* Total - border - padding */
+	margin: 0.5em calc(37.5px - 0.5em);
+
+	padding: 0.5em;
+	border: 0;
+
+	background-color: #0e1216;
+	color: #eee;
+
+	box-sizing: border-box;
+	width: 225px;
+}
+
+#login ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #999;
+    opacity: 1; /* Firefox */
+}
+
+#login :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #999;
+}
+
+#login ::-ms-input-placeholder { /* Microsoft Edge */
+    color: #999;
+}
