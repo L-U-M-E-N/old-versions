@@ -145,6 +145,8 @@ window.addEventListener('load', function() {
 		document.querySelector('#module-pomodoro-game').innerHTML = '&#9654';
 		document.querySelector('#module-pomodoro-other').innerHTML = '&#x25b7;';
 	});
+
+	createChart();
 });
 
 function formatTime(time) {
@@ -158,4 +160,99 @@ function formatTime(time) {
 	if(  hours < 10) {   hours = '0' +   hours; }
 
 	return hours + ':' + minutes + ':' + seconds;
+}
+
+function createChart() {
+	const ctx = document.getElementById('pomodoro-chart').getContext('2d');
+
+	const dates = [];
+	const workStats = [];
+	const gameStats = [];
+	const otherStats = [];
+
+	const data = JSON.parse(localStorage.history);
+	const lastMonth = new Date();
+	lastMonth.setMonth(lastMonth.getMonth() - 1);
+	lastMonth.setHours(0, 0, 0, 0);
+
+	let prevWork = 0;
+	let prevGame = 0;
+	let prevTotal = 0;
+
+	for(const i in data) {
+		const currDate = new Date(i);
+		if(currDate.getTime() >= Date.now()) { continue; }
+
+		const currWork = parseInt(data[i].workTime);
+		const currGame = parseInt(data[i].gameTime);
+		const currOther = parseInt(data[i].otherTime);
+		const currTotal = currWork + currGame + currOther;
+
+		dates.push('');
+		workStats.push(Math.round(100*(currWork + prevWork)/(currTotal + prevTotal)));
+		gameStats.push(Math.round(100*(currGame + prevGame)/(currTotal + prevTotal)));
+		otherStats.push(100 - workStats[workStats.length - 1] - gameStats[gameStats.length - 1]);
+
+		prevWork = currWork;
+		prevGame = currGame;
+		prevTotal = currTotal;
+	}
+
+	const myChart = new Chart(ctx, {
+		type: 'line',
+		data: {
+			labels: dates,
+			datasets: [{
+				label: 'Travail',
+				fill: true,
+				backgroundColor: '#2980b9',
+				pointBackgroundColor: '#3498db',
+				borderColor: '#3498db',
+				pointHighlightStroke: '#3498db',
+				borderCapStyle: 'butt',
+				data: workStats,
+
+			}, {
+				label: 'Autre',
+				fill: true,
+				backgroundColor: '#27ae60',
+				pointBackgroundColor: '#2ecc71',
+				borderColor: '#2ecc71',
+				pointHighlightStroke: '#2ecc71',
+				borderCapStyle: 'butt',
+				data: otherStats,
+			}, {
+				label: 'Jeux',
+				fill: true,
+				backgroundColor: '#c0392b',
+				pointBackgroundColor: '#e74c3c',
+				borderColor: '#e74c3c',
+				pointHighlightStroke: '#e74c3c',
+				borderCapStyle: 'butt',
+				data: gameStats,
+			}]
+		},
+		options: {
+			responsive: false,
+			// Can't just just `stacked: true` like the docs say
+			scales: {
+				yAxes: [{
+					stacked: true,
+					ticks: {
+						min: 0,
+						max: 100,
+						stepSize: 100
+					}
+				}]
+			},
+			animation: {
+				duration: 750,
+			},
+			legend: {
+				labels: {
+					fontColor: 'white',
+				}
+			}
+		}
+	});
 }
