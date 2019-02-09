@@ -3,7 +3,7 @@ class Router {
 	private $cacheBlacklist = array();
 	private $cacheTime = 86400; // in seconds
 
-	function __construct() {
+	public function __construct() {
 		global $config;
 		$this->cacheBlacklist = $config['cacheBlacklist'];
 	}
@@ -16,8 +16,9 @@ class Router {
 		$data['pageName'] = $pagename.'.php';
 		$data['cacheName'] = $this->buildCacheName($pagename);
 
-		// 
-		if(file_exists($data['cacheName']) && filemtime($data['cacheName']) > (time() - $this->cacheTime) && !in_array($pagename, $this->cacheBlacklist)) {
+		if(file_exists($data['cacheName']) &&
+			filemtime($data['cacheName']) > (time() - $this->cacheTime) &&
+			!in_array($pagename, $this->cacheBlacklist)) {
 
 			$data['readCache'] = true;
 		} else if(!in_array($pagename, $this->cacheBlacklist)) {
@@ -29,7 +30,7 @@ class Router {
 
 	private function buildCacheName($page) {
 		foreach ($_GET as $key => $value) {
-			if($key == 'route' || $key=='' || $value=='') { continue; }
+			if($key == 'route' || $key=='' || $value=='' || is_array($value)) { continue; }
 
 			$key   = htmlentities(htmlspecialchars($key));
 			$value = htmlentities(htmlspecialchars($value));

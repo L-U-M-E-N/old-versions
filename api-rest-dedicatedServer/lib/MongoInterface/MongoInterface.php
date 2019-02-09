@@ -1,4 +1,4 @@
-<?php 
+<?php
 /************************************************
 			      PHP MONGO LIB
 					BY ELANIS
@@ -13,10 +13,10 @@ class MongoInterface {
 	 * @param      string  $dbURL  The database url
 	 */
 	protected function connect($dbURL) {
-		global $config; 
+		global $config;
 
 		if(!isset($dbURL) || $dbURL=="") {
-			if(!isset($config['mongoURL']) || $config['mongoURL']=="") { 
+			if(!isset($config['mongoURL']) || $config['mongoURL']=="") {
 				die('DATABASE ERROR: All needed informations are not given !');
 			}
 
@@ -74,10 +74,10 @@ class MongoInterface {
 	 */
 	public function updateContent($db,$doc,$filter,$content) {
 		if(is_string($db) && is_string($doc) && is_array($filter) && is_array($content)) {
-			$bulkUsers = new MongoDB\Driver\BulkWrite();
-			$bulkUsers->update($filter,$content);
+			$bulk = new MongoDB\Driver\BulkWrite();
+			$bulk->update($filter,$content);
 
-			$this->manager->executeBulkWrite($db.'.'.$doc, $bulkUsers);
+			$this->manager->executeBulkWrite($db.'.'.$doc, $bulk);
 		}
 	}
 
@@ -90,10 +90,10 @@ class MongoInterface {
 	 */
 	public function addContent($db,$doc,$content) {
 		if(is_string($db) && is_string($doc) && is_array($content)) {
-			$bulkUsers = new MongoDB\Driver\BulkWrite(['ordered' => true]);
-			$bulkUsers->insert($content);
+			$bulk = new MongoDB\Driver\BulkWrite(['ordered' => true]);
+			$bulk->insert($content);
 
-			$this->manager->executeBulkWrite($db.'.'.$doc, $bulkUsers);
+			$this->manager->executeBulkWrite($db.'.'.$doc, $bulk);
 		}
 	}
 
@@ -106,11 +106,11 @@ class MongoInterface {
 	 */
 	public function removeContent($db,$doc,$filter) {
 		if(is_string($db) && is_string($doc) && is_array($filter)) {
-			$bulkUsers = new MongoDB\Driver\BulkWrite();
-			$bulkUsers->delete($filter);
+			$bulk = new MongoDB\Driver\BulkWrite();
+			$bulk->delete($filter);
 
-			$this->manager->executeBulkWrite($db.'.'.$doc, $bulkUsers);
-		} 
+			$this->manager->executeBulkWrite($db.'.'.$doc, $bulk);
+		}
 	}
 
 	/**
@@ -126,7 +126,7 @@ class MongoInterface {
 			$cmd = new MongoDB\Driver\Command(["count" => $collection, "query" => $query ]);
 			$result = $this->manager->executeCommand('hashBase', $cmd);
 
-			return json_decode(json_encode($result->toArray()[0]), true)['n'];	
-		} 
+			return json_decode(json_encode($result->toArray()[0]), true)['n'];
+		}
 	}
 }
