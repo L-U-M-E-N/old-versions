@@ -171,31 +171,39 @@ function createChart() {
 	const otherStats = [];
 
 	const data = JSON.parse(localStorage.history);
-	const lastMonth = new Date();
-	lastMonth.setMonth(lastMonth.getMonth() - 1);
-	lastMonth.setHours(0, 0, 0, 0);
 
-	let prevWork = 0;
-	let prevGame = 0;
-	let prevTotal = 0;
-
+	let historique = [];
 	for(const i in data) {
-		const currDate = new Date(i);
-		if(currDate.getTime() >= Date.now()) { continue; }
+		const curr = data[i];
+		historique.push({
+			workTime: parseInt(curr.workTime),
+			gameTime: parseInt(curr.gameTime),
+			otherTime: parseInt(curr.otherTime),
 
-		const currWork = parseInt(data[i].workTime);
-		const currGame = parseInt(data[i].gameTime);
-		const currOther = parseInt(data[i].otherTime);
-		const currTotal = currWork + currGame + currOther;
+			date: new Date(i),
+		});
 
-		dates.push('');
-		workStats.push(Math.round(100*(currWork + prevWork)/(currTotal + prevTotal)));
-		gameStats.push(Math.round(100*(currGame + prevGame)/(currTotal + prevTotal)));
-		otherStats.push(100 - workStats[workStats.length - 1] - gameStats[gameStats.length - 1]);
+		historique[historique.length - 1].total = historique[historique.length - 1].workTime + historique[historique.length - 1].gameTime + historique[historique.length - 1].otherTime;
+	}
+	historique = historique.sort(function(a,b) {
+		if(a.date.getTime() > b.date.getTime()) {
+			return 1;
+		} else if(a.date.getTime() === b.date.getTime()) {
+			return 0;
+		}
 
-		prevWork = currWork;
-		prevGame = currGame;
-		prevTotal = currTotal;
+		return -1;
+	});
+
+	for(let i=1; i<historique.length; i+=2) {
+		const prev = historique[i-1];
+		const curr = historique[i];
+
+		dates.push( ('0' + prev.date.getDate()).substr(-2) + '-' + curr.date.toLocaleDateString());
+
+		workStats.push( Math.round(100 * (prev.workTime + curr.workTime) / (prev.total + curr.total) ) );
+		gameStats.push( Math.round(100 * (prev.gameTime + curr.gameTime) / (prev.total + curr.total) ) );
+		otherStats.push( Math.round(100 * (prev.otherTime + curr.otherTime) / (prev.total + curr.total) ) );
 	}
 
 	const myChart = new Chart(ctx, {
@@ -243,6 +251,9 @@ function createChart() {
 						max: 100,
 						stepSize: 100
 					}
+				}],
+				xAxes: [{
+					display: false,
 				}]
 			},
 			animation: {
