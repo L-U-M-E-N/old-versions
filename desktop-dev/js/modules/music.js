@@ -48,6 +48,11 @@ class Music {
 			audioDOM.addEventListener('error', Music.nextMusic);
 			audioDOM.addEventListener('stalled', Music.nextMusic);
 
+			// Open window
+			document.getElementById('module-music-more').addEventListener('click', function() {
+				remote.getGlobal("createWindow")("Musique", 'views/music.html');
+			});
+
 			// Clavier
 			document.addEventListener('keydown', function(e) {
 				switch(e.which) {
@@ -227,14 +232,14 @@ class Music {
 	static increaseVolume() {
 		if(localStorage.audioVolume >= 100) { return; }
 		
-		localStorage.audioVolume = parseInt(localStorage.audioVolume) + 5;
+		localStorage.audioVolume = parseInt(localStorage.audioVolume) + 2;
 		Music.updateVolume();
 	}
 
 	static decreaseVolume() {
 		if(localStorage.audioVolume <= 0) { return; }
 		
-		localStorage.audioVolume = parseInt(localStorage.audioVolume) - 5;
+		localStorage.audioVolume = parseInt(localStorage.audioVolume) - 2;
 		Music.updateVolume();
 	}
 
@@ -391,7 +396,7 @@ class Music {
 			albumName = albumName[albumName.length - 1];
 			if(albumName === undefined) { albumName = 'noimage'; }
 
-			albumHTML += '<div class="album-pic" id="' + i + 
+			albumHTML += '<div class="tile" id="' + i + 
 				'" style="background-image: url(\'***REMOVED***/_icons/' + albumName +'.jpg\');">' + 
 				'<span class="add-album">+</span></div>';
 		}

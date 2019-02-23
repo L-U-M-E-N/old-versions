@@ -105,6 +105,35 @@ input {
 }
 
 /**
+ * Tile system
+ */
+.tile {
+	width: 19%;
+
+	padding-top: calc(19.5% - 0.5rem);
+	margin: 0.25%;
+	border-radius: 1%;
+
+	display: inline-block;
+
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color:  rgb(150,150,150);
+	background-color: rgba(150,150,150,0.2);
+	
+	box-sizing: border-box;
+
+	position: relative;
+}
+.tile:hover {
+	cursor: pointer;
+}
+.tile p {
+	text-align: center;
+}
+
+/**
  * Main flex system
  */
 .main {
@@ -131,7 +160,6 @@ input {
 	user-select: none;
 }
 
-/* Responsive layout - makes a two column-layout instead of four columns */
 @media (max-width: 1150px) {
 	.module {
 		flex: calc(50% - 1em);
@@ -139,7 +167,6 @@ input {
 	}
 }
 
-/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
 @media (max-width: 600px) {
 	.module {
 		flex: calc(100% - 1em);
@@ -186,6 +213,9 @@ audio {
 	width: 100%;
 
 	user-select: none;
+}
+#music-list li:hover {
+	cursor: pointer;
 }
 #playlist {
 	position: fixed;
@@ -242,30 +272,6 @@ audio {
 }
 #album-details li {
 	margin-left: 0.5em;
-}
-.album-pic {
-	width: 19%;
-
-	padding-top: calc(19.5% - 0.5rem);
-	margin: 0.25%;
-	border-radius: 1%;
-
-	display: inline-block;
-
-	background-size: 100%;
-	background-repeat: no-repeat;
-	background-color:  rgb(150,150,150);
-	background-color: rgba(150,150,150,0.2);
-	
-	box-sizing: border-box;
-
-	position: relative;
-}
-.album-pic:hover, #music-list li:hover {
-	cursor: pointer;
-}
-.album-pic p {
-	text-align: center;
 }
 .add-album {
 	position: absolute;
@@ -344,4 +350,61 @@ audio {
 }
 .popup input {
 	padding: 0.5em;
+}
+
+/**
+ * Pictures
+ */
+.module-pictures img {
+	max-width: 48%;
+	padding: 0.5% 1%;
+	vertical-align: middle;
+}
+#module-pictures-more:hover {
+	font-weight: bold;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+/**
+ * Fenetre: Pictures
+ */
+.main-pictures {
+	position: fixed;
+	top: 2em;
+	height: calc(100% - 2em);
+	width: 100%;
+
+	user-select: none;
+}
+.main-pictures .tile {
+	width: 10%;
+
+	padding-top: calc(10.5% - 0.5rem);
+}
+#main-pictures-list, #main-pictures-folder {
+    list-style: none;
+    font-size: 0.9em;
+    padding: 10px;
+    height: calc(100% - 3em);
+    overflow: auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+#main-pictures-folder, #main-pictures-folder-close {
+	display: none;
+}
+#main-pictures-folder-close, #main-pictures-file-view-close {
+	position: fixed;
+	top: 1em;
+	right: 1em;
+
+	cursor: pointer;
+}
+
+#main-pictures-file-view {
+	max-height: 90%;
+	max-width: 90%;
+
+	margin: 0 auto;
 }

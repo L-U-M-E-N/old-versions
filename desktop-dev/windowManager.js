@@ -1,15 +1,17 @@
 const DEFAULT_WIDTH = 1366;
 const DEFAULT_HEIGHT = 768;
 
-global.window = {
-	"music": false
-};
+global.window = {};
 
 global.createWindow = function(title,
 						documentURL, 
 						width=DEFAULT_WIDTH,
 						height=DEFAULT_HEIGHT,
 						options={}) {
+
+	if(!!window[title]) { return {}; }
+
+	window[title] = true;
 	
 	let externalURL = (documentURL.substr(0,4) == "http");
 
@@ -38,6 +40,10 @@ global.createWindow = function(title,
 	}
 
 	return win;
+};
+
+global.closeWindow = function(title) {
+	window[title] = false;
 };
 
 global.exitPopup = function() {
