@@ -19,6 +19,12 @@ window.addEventListener('load', function() {
 	});
 });
 
+const viewNames = {
+	music: "Musique",
+	pictures: "Images",
+};
+
 window.addEventListener('beforeunload', function() {
-	remote.getGlobal("window")[currentWindow] = false;
+	remote.getGlobal('console').log("Closing " + currentWindow);
+	remote.getGlobal("closeWindow")(viewNames[currentWindow]);
 });

@@ -203,7 +203,7 @@ function createChart() {
 
 		workStats.push( Math.round(100 * (prev.workTime + curr.workTime) / (prev.total + curr.total) ) );
 		gameStats.push( Math.round(100 * (prev.gameTime + curr.gameTime) / (prev.total + curr.total) ) );
-		otherStats.push( Math.round(100 * (prev.otherTime + curr.otherTime) / (prev.total + curr.total) ) );
+		otherStats.push( 100 - workStats[workStats.length - 1] - gameStats[gameStats.length - 1]);
 	}
 
 	const myChart = new Chart(ctx, {
