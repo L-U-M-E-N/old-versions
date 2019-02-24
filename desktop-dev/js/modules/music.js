@@ -403,7 +403,7 @@ class Music {
 
 		document.querySelector('#albumlist').innerHTML = albumHTML;
 
-		let albumsDOM = document.querySelectorAll('.album-pic');
+		let albumsDOM = document.querySelectorAll('.tile');
 		for(let a=0; a<albumsDOM.length; a++) {
 			albumsDOM[a].addEventListener('click', function(e) {
 

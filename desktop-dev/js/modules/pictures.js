@@ -56,7 +56,7 @@ class Pictures {
 					break;
 				}
 			}
-			if(blacklisted) { console.log(i); continue; }
+			if(blacklisted) { continue; }
 
 			for(let j=0; j<picList[i].length; j++) {
 				tmpList.push(i + '/' + picList[i][j]);
