@@ -195,14 +195,24 @@ function createChart() {
 		return -1;
 	});
 
-	for(let i=1; i<historique.length; i+=2) {
-		const prev = historique[i-1];
-		const curr = historique[i];
+	function sum(historique, curr, length, field) {
+		let total = 0;
+		for(let i=curr - length; i<curr; i++) {
+			total += historique[i][field];
+		}
 
-		dates.push( ('0' + prev.date.getDate()).substr(-2) + '-' + curr.date.toLocaleDateString());
+		return total;
+	}
 
-		workStats.push( Math.round(100 * (prev.workTime + curr.workTime) / (prev.total + curr.total) ) );
-		gameStats.push( Math.round(100 * (prev.gameTime + curr.gameTime) / (prev.total + curr.total) ) );
+	for(let i=7; i<historique.length; i++) {
+		const total = sum(historique, i, 7, 'total');
+		const workTime = sum(historique, i, 7, 'workTime');
+		const gameTime = sum(historique, i, 7, 'gameTime');
+
+		dates.push( ('0' + historique[i-7].date.getDate()).substr(-2) + '-' + historique[i].date.toLocaleDateString());
+
+		workStats.push( Math.round(100 * workTime / total ) );
+		gameStats.push( Math.round(100 * gameTime / total ) );
 		otherStats.push( 100 - workStats[workStats.length - 1] - gameStats[gameStats.length - 1]);
 	}
 
