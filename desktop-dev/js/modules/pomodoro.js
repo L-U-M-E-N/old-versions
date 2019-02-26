@@ -205,6 +205,8 @@ function createChart() {
 	}
 
 	for(let i=7; i<historique.length; i++) {
+		if(historique[i].date.getTime() < Date.now() - 7776000000) { continue; } // Garder les 3 derniers mois
+
 		const total = sum(historique, i, 7, 'total');
 		const workTime = sum(historique, i, 7, 'workTime');
 		const gameTime = sum(historique, i, 7, 'gameTime');
@@ -272,6 +274,11 @@ function createChart() {
 			legend: {
 				labels: {
 					fontColor: 'white',
+				}
+			},
+			elements: {
+				point: {
+					radius: 0,
 				}
 			}
 		}
