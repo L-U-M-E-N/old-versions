@@ -1,18 +1,18 @@
 const remote = require('electron').remote;
 
 window.addEventListener('load', function() {
-	document.querySelector("#window-close-button")
-		.addEventListener("click", function() {
-			if(currentWindow === undefined) { console.log("Impossible de connaitre la fenetre courant - abandon"); return; }
+	document.querySelector('#window-close-button')
+		.addEventListener('click', function() {
+			if(currentWindow === undefined) { console.log('Impossible de connaitre la fenetre courant - abandon'); return; }
 
-			if(currentWindow != "index") {
+			if(currentWindow !== 'index') {
 				remote.getCurrentWindow().close();
 			} else {
-				remote.getGlobal("exitPopup")();
+				remote.getGlobal('exitPopup')();
 			}
-	});
+		});
 
-	document.addEventListener("keydown", function(e) {
+	document.addEventListener('keydown', function(e) {
 		if (e.which === 123) {
 			remote.getCurrentWindow().toggleDevTools();
 		}
@@ -20,11 +20,11 @@ window.addEventListener('load', function() {
 });
 
 const viewNames = {
-	music: "Musique",
-	pictures: "Images",
+	music: 'Musique',
+	pictures: 'Images',
 };
 
 window.addEventListener('beforeunload', function() {
-	remote.getGlobal('console').log("Closing " + currentWindow);
-	remote.getGlobal("closeWindow")(viewNames[currentWindow]);
+	remote.getGlobal('console').log('Closing ' + currentWindow);
+	remote.getGlobal('closeWindow')(viewNames[currentWindow]);
 });
