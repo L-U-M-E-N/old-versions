@@ -390,8 +390,32 @@ class Music {
 
 	static regenerateAlbumList() {
 		let albumHTML = "";
+		let albums = [];
 
-		for(let i in remote.getGlobal("musicList")) {
+		for(const i in remote.getGlobal("musicList")) {
+			albums.push(i);
+		}
+
+		albums.sort((a,b) => {
+			if(a === '***REMOVED***') { return -1; }
+			if(b === '***REMOVED***') { return 1; }
+
+			let albumA = a.split('/');
+			albumA = albumA[albumA.length - 1];
+
+			let albumB = b.split('/');
+			albumB = albumB[albumB.length - 1];
+
+			if(albumA > albumB) {
+				return 1;
+			} else if(albumA < albumB) {
+				return -1;
+			}
+
+			return 0;
+		});
+
+		for(const i of albums) {
 			let albumName = i.split("/");
 			albumName = albumName[albumName.length - 1];
 			if(albumName === undefined) { albumName = 'noimage'; }
