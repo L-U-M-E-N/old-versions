@@ -1,7 +1,10 @@
 const DEFAULT_WIDTH = 1366;
 const DEFAULT_HEIGHT = 768;
 
-global.window = {};
+global.window = {
+	Musique: false,
+	Images: false,
+};
 
 global.createWindow = function(title,
 						documentURL, 
@@ -9,10 +12,12 @@ global.createWindow = function(title,
 						height=DEFAULT_HEIGHT,
 						options={}) {
 
-	if(!!window[title]) { return {}; }
+	if(window[title] === true) { return {}; }
 
-	window[title] = true;
-	
+	if(window[title] === false) {
+		window[title] = true;
+	}
+
 	let externalURL = (documentURL.substr(0,4) == "http");
 
 	let windowData = {
