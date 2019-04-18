@@ -15,13 +15,14 @@ class Pictures {
 			});
 		} else {
 			const listDOM = document.getElementById('main-pictures-list');
-			listDOM.innerHTML = '';
+			let htmlContent = '';
 			for(const i in picList) {
 				const folders = i.split('/');
-				listDOM.innerHTML += '<li class="tile" style="background-image: url(\'' + Pictures.normalizeFileName(i + '/' + picList[i][0]) + '\');" folder="' + i + '">' +
+				htmlContent += '<li class="tile" style="background-image: url(\'' + Pictures.normalizeFileName(i + '/' + picList[i][0]) + '\');" folder="' + i + '">' +
 					'<p>' + folders[folders.length - 1] + '</p>' +
 				'</li>';
 			}
+			listDOM.innerHTML = htmlContent;
 
 			const tilesDOM = listDOM.getElementsByClassName('tile');
 			Array.from(tilesDOM).forEach((elt) => {
@@ -69,9 +70,11 @@ class Pictures {
 			imgMain.add(elt);
 		}
 
+		let content = '';
 		for(const item of imgMain) {
-			imgDOM.innerHTML += '<img src="' + Pictures.normalizeFileName(item) + '">';
+			content += '<img src="' + Pictures.normalizeFileName(item) + '">';
 		}
+		imgDOM.innerHTML = content;
 	}
 
 	static openFolder(folderName) {
@@ -79,11 +82,30 @@ class Pictures {
 		document.getElementById('main-pictures-folder-close').style.display = 'block';
 		const listDOM = document.getElementById('main-pictures-folder');
 		listDOM.style.display = 'block';
-		listDOM.innerHTML = '';
 
-		for(let i=0; i<picList[folderName].length; i++) {
-			listDOM.innerHTML += '<li class="tile" style="background-image: url(\'' + Pictures.normalizeFileName(folderName + '/' + picList[folderName][i]) + '\');"></li>';
+		function loadPicture(i=0) {
+			if(i >= picList[folderName].length) {
+				return;
+			}
+
+			const elt = document.createElement('li');
+
+			const bgImg = new Image();
+			bgImg.onload = () => {
+				elt.classList.add('tile');
+				elt.style.backgroundImage = 'url(\'' + bgImg.src + '\')';
+
+				listDOM.appendChild(elt);
+
+				loadPicture(++i);
+			};
+			bgImg.onerror = () => {
+				loadPicture(++i);
+			};
+
+			bgImg.src = Pictures.normalizeFileName(folderName + '/' + picList[folderName][i]);
 		}
+		loadPicture();
 
 		const tilesDOM = listDOM.getElementsByClassName('tile');
 		Array.from(tilesDOM).forEach((elt) => {
