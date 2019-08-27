@@ -7,7 +7,7 @@ function updateFiles(callback) {
 	global.musicList = {};
 	let timeout = -1;
 
-	fileScanner('G:/Musique',/\.(mp3|ogg)$/,function(filename){
+	fileScanner('G:/Musique',/\.(mp3|ogg|flac)$/,function(filename){
 		let albumName = filename.split("\\");
 		let musicName = albumName.pop();
 		albumName     = albumName.join("/");
