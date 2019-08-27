@@ -197,21 +197,21 @@ function createChart() {
 
 	function sum(historique, curr, length, field) {
 		let total = 0;
-		for(let i=curr - length; i<curr; i++) {
+		for(let i=curr - length; i<=curr; i++) {
 			total += historique[i][field];
 		}
 
 		return total;
 	}
 
-	for(let i=7; i<historique.length; i++) {
+	for(let i=6; i<historique.length; i++) {
 		if(historique[i].date.getTime() < Date.now() - 7776000000) { continue; } // Garder les 3 derniers mois
 
-		const total = sum(historique, i, 7, 'total');
-		const workTime = sum(historique, i, 7, 'workTime');
-		const gameTime = sum(historique, i, 7, 'gameTime');
+		const total = sum(historique, i, 6, 'total');
+		const workTime = sum(historique, i, 6, 'workTime');
+		const gameTime = sum(historique, i, 6, 'gameTime');
 
-		dates.push( ('0' + historique[i-7].date.getDate()).substr(-2) + '-' + historique[i].date.toLocaleDateString());
+		dates.push( ('0' + historique[i-6].date.getDate()).substr(-2) + '-' + historique[i].date.toLocaleDateString());
 
 		workStats.push( Math.round(100 * workTime / total ) );
 		gameStats.push( Math.round(100 * gameTime / total ) );
@@ -261,7 +261,7 @@ function createChart() {
 					ticks: {
 						min: 0,
 						max: 100,
-						stepSize: 100
+						stepSize: 10
 					}
 				}],
 				xAxes: [{
@@ -280,6 +280,43 @@ function createChart() {
 				point: {
 					radius: 0,
 				}
+			},
+			annotation: {
+				annotations: [{
+					type: 'line',
+					mode: 'horizontal',
+					scaleID: 'y-axis-0',
+					value: 20,
+					borderColor: 'rgb(255, 0, 0)',
+					borderWidth: 1,
+					label: {
+						enabled: false,
+						content: 'Min.'
+					}
+				},{
+					type: 'line',
+					mode: 'horizontal',
+					scaleID: 'y-axis-0',
+					value: 33,
+					borderColor: 'rgb(0, 255, 0)',
+					borderWidth: 1,
+					label: {
+						enabled: false,
+						content: 'Perfect.'
+					}
+				},{
+					type: 'line',
+					mode: 'horizontal',
+					scaleID: 'y-axis-0',
+					value: 66,
+					borderColor: 'rgb(0, 0, 0)',
+					borderWidth: 1,
+					label: {
+						enabled: false,
+						content: 'Game Perfect.'
+					}
+				}
+				]
 			}
 		}
 	});

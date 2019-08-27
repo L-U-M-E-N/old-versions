@@ -1,16 +1,16 @@
 const imgCount = 4;
-let picList = remote.getGlobal('pictureList');
+const picList = remote.getGlobal('pictureList');
 
 class Pictures {
 	static init() {
-		if(currentWindow == 'index') {
+		if(currentWindow === 'index') {
 			const imgDOM = document.getElementsByClassName('module-pictures')[0];
 
 			Pictures.drawRandomImg(imgDOM);
 
 			imgDOM.innerHTML += '<br/><br/><span id="module-pictures-more">Plus d\'images</span>';
 
-			document.getElementById('module-pictures-more').addEventListener('click', function() {
+			document.getElementById('module-pictures-more').addEventListener('click', () => {
 				remote.getGlobal('createWindow')('Images', 'views/pictures.html');
 			});
 		} else {
@@ -26,16 +26,16 @@ class Pictures {
 
 			const tilesDOM = listDOM.getElementsByClassName('tile');
 			Array.from(tilesDOM).forEach((elt) => {
-				elt.addEventListener('click', function() {
-					Pictures.openFolder(this.getAttribute('folder'));
+				elt.addEventListener('click', () => {
+					Pictures.openFolder(elt.getAttribute('folder'));
 				});
 			});
 
-			document.getElementById('main-pictures-folder-close').addEventListener('click', function() {
+			document.getElementById('main-pictures-folder-close').addEventListener('click', () => {
 				Pictures.closeFolder();
 			});
 
-			document.getElementById('main-pictures-file-view-close').addEventListener('click', function() {
+			document.getElementById('main-pictures-file-view-close').addEventListener('click', () => {
 				Pictures.closeFile();
 			});
 		}
@@ -43,6 +43,7 @@ class Pictures {
 
 	static drawRandomImg(imgDOM) {
 		const blacklist = [
+			'Archives',
 			'MIA',
 			'Moi',
 			'Souvenirs'
@@ -83,8 +84,19 @@ class Pictures {
 		const listDOM = document.getElementById('main-pictures-folder');
 		listDOM.style.display = 'block';
 
+		while(listDOM.firstChild) {
+			listDOM.removeChild(listDOM.firstChild);
+		}
+
 		function loadPicture(i=0) {
 			if(i >= picList[folderName].length) {
+				const tilesDOM = listDOM.getElementsByClassName('tile');
+				Array.from(tilesDOM).forEach((elt) => {
+					elt.addEventListener('click', () => {
+						Pictures.openFile(elt.style.backgroundImage.slice(4, -1).replace(/"/g, ''));
+					});
+				});
+
 				return;
 			}
 
@@ -106,13 +118,6 @@ class Pictures {
 			bgImg.src = Pictures.normalizeFileName(folderName + '/' + picList[folderName][i]);
 		}
 		loadPicture();
-
-		const tilesDOM = listDOM.getElementsByClassName('tile');
-		Array.from(tilesDOM).forEach((elt) => {
-			elt.addEventListener('click', function() {
-				Pictures.openFile(this.style.backgroundImage.slice(4, -1).replace(/"/g, ''));
-			});
-		});
 	}
 
 	static closeFolder() {
