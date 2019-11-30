@@ -2,7 +2,7 @@
 global.videoList = {};
 const extensions = /\.(mp4|mkv|avi)$/;
 
-fileScanner('s:\\', extensions, function(filename){
+fileScanner('r:\\', extensions, function(filename){
 	let dirName  = filename.split('\\');
 	const vidName  = dirName.pop();
 	dirName      = dirName.join('/');
