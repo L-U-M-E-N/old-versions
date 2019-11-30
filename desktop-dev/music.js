@@ -8,9 +8,9 @@ function updateFiles(callback) {
 	let timeout = -1;
 
 	fileScanner('***REMOVED***',/\.(mp3|ogg|flac)$/,function(filename){
-		let albumName = filename.split("\\");
+		let albumName = filename.split('\\');
 		let musicName = albumName.pop();
-		albumName     = albumName.join("/");
+		albumName     = albumName.join('/');
 
 		if(musicList[albumName] === undefined) { musicList[albumName] = []; }
 		musicList[albumName].push(musicName);
