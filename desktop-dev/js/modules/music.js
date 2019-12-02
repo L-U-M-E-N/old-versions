@@ -167,12 +167,12 @@ class Music {
 			// Swap sources
 			x = playlistSrc[i];
 			playlistSrc[i] = playlistSrc[j];
-			playlistSrc[j] = x; 
+			playlistSrc[j] = x;
 
-			if(i==playlistCurrent) { 
-				playlistCurrent = j; 
-			} else if(j==playlistCurrent) { 
-				playlistCurrent = i; 
+			if(i==playlistCurrent) {
+				playlistCurrent = j;
+			} else if(j==playlistCurrent) {
+				playlistCurrent = i;
 			}
 		}
 	}
@@ -549,7 +549,7 @@ class Music {
 			if(a.score > b.score) {
 				return -1;
 			} else if(a.score === b.score) {
-				if(a.count > b.count) {
+				if(a.count < b.count) {
 					return -1;
 				} else if(a.count === b.count) {
 					return 0;
@@ -559,10 +559,12 @@ class Music {
 			return 1;
 		});
 
+		const randomIntervalSize = (musics.length - musicCount) / randomInterval;
+
 		for(let i = 0; i < Math.min(musics.length, musicCount); i++) {
 			let id = i;
 			if(i % randomInterval === randomInterval - 1) {
-				id = musics.length - i;
+				id = Math.floor((Math.random() * randomIntervalSize) + randomIntervalSize * Math.ceil(musics.length / randomIntervalSize));
 			}
 
 			playlist.push(musics[i].name);
@@ -589,7 +591,7 @@ class Music {
 		document.getElementById('module-music-auto').style.color = 'red';
 		document.getElementById('module-music-more').style.display = 'none';
 
-		Music.setPlaylistFromMostLiked(200, 20);
+		Music.setPlaylistFromMostLiked(200, 5);
 	}
 }
 window.addEventListener('load', Music.init);
