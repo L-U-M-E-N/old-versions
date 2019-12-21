@@ -545,14 +545,14 @@ class Music {
 			}
 		}
 
+		const maxCount = Math.max(...musics.map(e => e.count));
+
 		musics = musics.sort((a, b) => {
 			if(a.score > b.score) {
 				return -1;
 			} else if(a.score === b.score) {
-				if(a.count < b.count) {
+				if(Math.random() > (0.5 + 0.5 * (a.count - b.count) / maxCount)) {
 					return -1;
-				} else if(a.count === b.count) {
-					return 0;
 				}
 			}
 
@@ -564,14 +564,14 @@ class Music {
 		for(let i = 0; i < Math.min(musics.length, musicCount); i++) {
 			let id = i;
 			if(i % randomInterval === randomInterval - 1) {
-				id = Math.floor((Math.random() * randomIntervalSize) + randomIntervalSize * Math.ceil(musics.length / randomIntervalSize));
+				id = Math.floor((Math.random() * randomIntervalSize) + (randomIntervalSize * (Math.ceil(i / randomIntervalSize) - 1)));
 			}
 
-			playlist.push(musics[i].name);
-			playlistSrc.push(musics[i].path);
+			playlist.push(musics[id].name);
+			playlistSrc.push(musics[id].path);
 
-			orderedPlaylist.push(musics[i].name);
-			orderedPlaylistSrc.push(musics[i].path);
+			orderedPlaylist.push(musics[id].name);
+			orderedPlaylistSrc.push(musics[id].path);
 		}
 
 		Music.updateVarsToMain();
