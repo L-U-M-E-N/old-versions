@@ -25,9 +25,6 @@ require('./pictures');
 // Videos & Movies
 require('./videos');
 
-// Mongo interface
-let child = fork('L:/Softwares/adminMongo/app');
-
 // Init app
 function init() {
 	global.mainWindow = createWindow("Projet L.U.M.E.N - Learned United Machines of Elanis Network", 'views/index.html', 1920, 1080);
