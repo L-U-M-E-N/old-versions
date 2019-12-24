@@ -522,7 +522,7 @@ class Music {
 
 		const musicScores = JSON.parse(localStorage.musicScores);
 
-		let musics = [];
+		const musics = [];
 		const allMusics = remote.getGlobal('musicList');
 		for(const albumID in allMusics) {
 			const album = allMusics[albumID];
@@ -545,33 +545,17 @@ class Music {
 			}
 		}
 
-		const maxCount = Math.max(...musics.map(e => e.count));
+		const proba = randomInterval / musicCount;
+		while(playlist.length <= musicCount) {
+			const id = Math.floor(Math.random() * (musicCount - 1));
 
-		musics = musics.sort((a, b) => {
-			if(a.score > b.score) {
-				return -1;
-			} else if(a.score === b.score) {
-				if(Math.random() > (0.5 + 0.5 * (a.count - b.count) / maxCount)) {
-					return -1;
-				}
+			if(Math.random() < (1 - proba) * musics[id].score) {
+				playlist.push(musics[id].name);
+				playlistSrc.push(musics[id].path);
+
+				orderedPlaylist.push(musics[id].name);
+				orderedPlaylistSrc.push(musics[id].path);
 			}
-
-			return 1;
-		});
-
-		const randomIntervalSize = (musics.length - musicCount) / randomInterval;
-
-		for(let i = 0; i < Math.min(musics.length, musicCount); i++) {
-			let id = i;
-			if(i % randomInterval === randomInterval - 1) {
-				id = Math.floor((Math.random() * randomIntervalSize) + (randomIntervalSize * (Math.ceil(i / randomIntervalSize) - 1)));
-			}
-
-			playlist.push(musics[id].name);
-			playlistSrc.push(musics[id].path);
-
-			orderedPlaylist.push(musics[id].name);
-			orderedPlaylistSrc.push(musics[id].path);
 		}
 
 		Music.updateVarsToMain();
