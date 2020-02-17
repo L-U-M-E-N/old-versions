@@ -545,9 +545,17 @@ class Music {
 			}
 		}
 
+		const alreadyAdded = new Set();
 		const proba = randomInterval / musicCount;
+		let same = 0;
 		while(playlist.length <= musicCount) {
-			const id = Math.floor(Math.random() * (musicCount - 1));
+			const id = Math.floor(Math.random() * (musics.length - 1));
+
+			if(alreadyAdded.has(id)) {
+				same++;
+				if(same >= musicCount / 10) { break; }
+				continue;
+			}
 
 			if(Math.random() < (1 - proba) * musics[id].score) {
 				playlist.push(musics[id].name);
@@ -555,6 +563,9 @@ class Music {
 
 				orderedPlaylist.push(musics[id].name);
 				orderedPlaylistSrc.push(musics[id].path);
+
+				alreadyAdded.add(id);
+				same = 0;
 			}
 		}
 
