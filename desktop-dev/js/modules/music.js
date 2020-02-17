@@ -532,7 +532,7 @@ class Music {
 				if(!musicScores[Music.transformSrcToFileSrc(fullPath)]) {
 					musicScores[Music.transformSrcToFileSrc(fullPath)] = {
 						count: 1, // Prevent divide by 0
-						scoreSum: 0
+						scoreSum: 0.5
 					};
 				}
 
@@ -557,7 +557,7 @@ class Music {
 				continue;
 			}
 
-			if(Math.random() < (1 - proba) * musics[id].score) {
+			if(Math.random() < ( proba + ((1 - proba) * musics[id].score))) {
 				playlist.push(musics[id].name);
 				playlistSrc.push(musics[id].path);
 
