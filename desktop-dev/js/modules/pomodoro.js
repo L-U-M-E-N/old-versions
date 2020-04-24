@@ -93,9 +93,9 @@ window.addEventListener('load', function() {
 
 		// Draw day percentages
 		const total = parseInt(localStorage.workTime) + parseInt(localStorage.gameTime) + parseInt(localStorage.otherTime);
-		const otherPercent = 100 - Math.round(localStorage.workTime/total*100) - Math.round(localStorage.gameTime/total*100);
-		document.querySelector('#module-pomodoro-work-day-percentage').innerText = Math.round(localStorage.workTime/total*100) + '%';
-		document.querySelector('#module-pomodoro-game-day-percentage').innerText = Math.round(localStorage.gameTime/total*100) + '%';
+		const otherPercent = (100 - (localStorage.workTime/total*100) - (localStorage.gameTime/total*100)).toFixed(1);
+		document.querySelector('#module-pomodoro-work-day-percentage').innerText = (localStorage.workTime/total*100).toFixed(1) + '%';
+		document.querySelector('#module-pomodoro-game-day-percentage').innerText = (localStorage.gameTime/total*100).toFixed(1) + '%';
 		document.querySelector('#module-pomodoro-other-day-percentage').innerText = otherPercent + '%';
 
 		// Week & Month
@@ -109,16 +109,16 @@ window.addEventListener('load', function() {
 
 		// Draw week percentages
 		const weekTotal = localWeekWork + localWeekGame + localWeekOther;
-		const weekOtherPercent = 100 - Math.round(localWeekWork/weekTotal*100) - Math.round(localWeekGame/weekTotal*100);
-		document.querySelector('#module-pomodoro-work-week-percentage').innerText = Math.round(localWeekWork/weekTotal*100) + '%';
-		document.querySelector('#module-pomodoro-game-week-percentage').innerText = Math.round(localWeekGame/weekTotal*100) + '%';
+		const weekOtherPercent = (100 - (localWeekWork/weekTotal*100) - (localWeekGame/weekTotal*100)).toFixed(1);
+		document.querySelector('#module-pomodoro-work-week-percentage').innerText = (localWeekWork/weekTotal*100).toFixed(1) + '%';
+		document.querySelector('#module-pomodoro-game-week-percentage').innerText = (localWeekGame/weekTotal*100).toFixed(1) + '%';
 		document.querySelector('#module-pomodoro-other-week-percentage').innerText = weekOtherPercent + '%';
 
 		// Draw week percentages
 		const monthTotal = localMonthWork + localMonthGame + localMonthOther;
-		const monthOtherPercent = 100 - Math.round(localMonthWork/monthTotal*100) - Math.round(localMonthGame/monthTotal*100);
-		document.querySelector('#module-pomodoro-work-month-percentage').innerText = Math.round(localMonthWork/monthTotal*100) + '%';
-		document.querySelector('#module-pomodoro-game-month-percentage').innerText = Math.round(localMonthGame/monthTotal*100) + '%';
+		const monthOtherPercent = (100 - (localMonthWork/monthTotal*100) - (localMonthGame/monthTotal*100)).toFixed(1);
+		document.querySelector('#module-pomodoro-work-month-percentage').innerText = (localMonthWork/monthTotal*100).toFixed(1) + '%';
+		document.querySelector('#module-pomodoro-game-month-percentage').innerText = (localMonthGame/monthTotal*100).toFixed(1) + '%';
 		document.querySelector('#module-pomodoro-other-month-percentage').innerText = monthOtherPercent + '%';
 	}, 1000);
 
