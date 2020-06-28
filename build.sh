@@ -10,4 +10,4 @@ appDesc="";
 rm -rf desktop-build/*
 
 # Build cmds
-electron-packager "$appDir" "$appName" --production -–asar=true --prune=true --overwrite --platform=win32 --arch=all --icon="$appIcon" --out="$appBuildDir" --version-string.CompanyName="$appCompany" --version-string.FileDescription="$appDesc" --version-string.ProductName="$appName"
+electron-packager "$appDir" "$appName" --production -–asar=true --prune=true --overwrite --platform=win32 --arch=x64 --icon="$appIcon" --out="$appBuildDir" --version-string.CompanyName="$appCompany" --version-string.FileDescription="$appDesc" --version-string.ProductName="$appName"
