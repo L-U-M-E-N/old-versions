@@ -26,6 +26,9 @@ global.createWindow = function(title,
 		frame: externalURL,
 		autoHideMenuBar: externalURL,
 		icon: 'img/icon.png',
+		webPreferences: {
+			nodeIntegration: true,
+		},
 		title,
 	};
 
