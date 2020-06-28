@@ -2,7 +2,15 @@
 const alertRatio = 0.8;
 const minAlert = 3600; // Enable alerts after one hour
 
-let currentMode = -1; // -1 = Other, 0 = Work, 1 = Game,
+const MODE_ENUM = {
+	OTHER: -1,
+	WORK: 0,
+	GAME: 1,
+	NONE: 2
+};
+
+let currentMode = MODE_ENUM.OTHER;
+let videoOn = false;
 
 window.addEventListener('load', function() {
 	const lastDate = new Date(parseInt(localStorage.lastLaunch)).toDateString();
@@ -27,10 +35,12 @@ window.addEventListener('load', function() {
 		localStorage.workTime=0;
 		localStorage.gameTime=0;
 		localStorage.otherTime=0;
+		localStorage.videoTime=0;
 	} else {
 		localStorage.workTime = parseInt(localStorage.workTime);
 		localStorage.gameTime  = parseInt(localStorage.gameTime);
 		localStorage.otherTime  = parseInt(localStorage.otherTime);
+		localStorage.videoTime  = parseInt(localStorage.videoTime);
 	}
 
 	localStorage.lastLaunch = Date.now();
@@ -38,11 +48,13 @@ window.addEventListener('load', function() {
 	// Week & Month
 	let weekWork = parseInt(localStorage.workTime),
 		weekGame = parseInt(localStorage.gameTime),
-		weekOther = parseInt(localStorage.otherTime);
+		weekOther = parseInt(localStorage.otherTime),
+		weekVideo = parseInt(localStorage.videoTime);
 
 	let monthWork = parseInt(localStorage.workTime),
 		monthGame = parseInt(localStorage.gameTime),
-		monthOther = parseInt(localStorage.otherTime);
+		monthOther = parseInt(localStorage.otherTime),
+		monthVideo = parseInt(localStorage.videoTime);
 
 	const lastWeek = new Date();
 	lastWeek.setDate(lastWeek.getDate() - 7);
@@ -60,15 +72,24 @@ window.addEventListener('load', function() {
 				weekWork += parseInt(history[i].workTime);
 				weekGame += parseInt(history[i].gameTime);
 				weekOther += parseInt(history[i].otherTime);
+				if(history[i].videoTime) {
+					weekVideo += parseInt(history[i].videoTime);
+				}
 
 				monthWork += parseInt(history[i].workTime);
 				monthGame += parseInt(history[i].gameTime);
 				monthOther += parseInt(history[i].otherTime);
+				if(history[i].videoTime) {
+					monthVideo += parseInt(history[i].videoTime);
+				}
 			} else if(new Date(i).getTime() >= lastMonth.getTime()) {
 
 				monthWork += parseInt(history[i].workTime);
 				monthGame += parseInt(history[i].gameTime);
 				monthOther += parseInt(history[i].otherTime);
+				if(history[i].videoTime) {
+					monthVideo += parseInt(history[i].videoTime);
+				}
 			}
 		}
 	}
@@ -76,12 +97,16 @@ window.addEventListener('load', function() {
 	setInterval(function() {
 		// Day
 		// Increments
-		if(currentMode === 1) {
+		if(currentMode === MODE_ENUM.GAME) {
 			localStorage.gameTime = parseInt(localStorage.gameTime) + 1;
-		} else if(currentMode === 0) {
+		} else if(currentMode === MODE_ENUM.WORK) {
 			localStorage.workTime = parseInt(localStorage.workTime) + 1;
-		} else {
+		} else if(currentMode === MODE_ENUM.OTHER) {
 			localStorage.otherTime = parseInt(localStorage.otherTime) + 1;
+		}
+
+		if(videoOn) {
+			localStorage.videoTime = parseInt(localStorage.videoTime) + 1;
 		}
 
 		// @ADD: Alerts when too much game, alert when working for more than a hour
@@ -90,6 +115,7 @@ window.addEventListener('load', function() {
 		document.querySelector('#module-pomodoro-work-time').innerText = formatTime(localStorage.workTime);
 		document.querySelector('#module-pomodoro-game-time').innerText = formatTime(localStorage.gameTime);
 		document.querySelector('#module-pomodoro-other-time').innerText = formatTime(localStorage.otherTime);
+		document.querySelector('#module-pomodoro-videos-time').innerText = formatTime(localStorage.videoTime);
 
 		// Draw day percentages
 		const total = parseInt(localStorage.workTime) + parseInt(localStorage.gameTime) + parseInt(localStorage.otherTime);
@@ -97,15 +123,18 @@ window.addEventListener('load', function() {
 		document.querySelector('#module-pomodoro-work-day-percentage').innerText = (localStorage.workTime/total*100).toFixed(1) + '%';
 		document.querySelector('#module-pomodoro-game-day-percentage').innerText = (localStorage.gameTime/total*100).toFixed(1) + '%';
 		document.querySelector('#module-pomodoro-other-day-percentage').innerText = otherPercent + '%';
+		document.querySelector('#module-pomodoro-videos-day-percentage').innerText = (localStorage.videoTime/total*100).toFixed(1) + '%';
 
 		// Week & Month
 		const localWeekWork = parseInt(localStorage.workTime) + weekWork,
 			localWeekGame = parseInt(localStorage.gameTime) + weekGame,
-			localWeekOther = parseInt(localStorage.otherTime) + weekOther;
+			localWeekOther = parseInt(localStorage.otherTime) + weekOther,
+			localWeekVideo = parseInt(localStorage.videoTime) + weekVideo;
 
 		const localMonthWork = parseInt(localStorage.workTime) + monthWork,
 			localMonthGame = parseInt(localStorage.gameTime) + monthGame,
-			localMonthOther = parseInt(localStorage.otherTime) + monthOther;
+			localMonthOther = parseInt(localStorage.otherTime) + monthOther,
+			localMonthVideo = parseInt(localStorage.videoTime) + monthVideo;
 
 		// Draw week percentages
 		const weekTotal = localWeekWork + localWeekGame + localWeekOther;
@@ -113,6 +142,7 @@ window.addEventListener('load', function() {
 		document.querySelector('#module-pomodoro-work-week-percentage').innerText = (localWeekWork/weekTotal*100).toFixed(1) + '%';
 		document.querySelector('#module-pomodoro-game-week-percentage').innerText = (localWeekGame/weekTotal*100).toFixed(1) + '%';
 		document.querySelector('#module-pomodoro-other-week-percentage').innerText = weekOtherPercent + '%';
+		document.querySelector('#module-pomodoro-videos-week-percentage').innerText = (localWeekVideo/weekTotal*100).toFixed(1) + '%';
 
 		// Draw week percentages
 		const monthTotal = localMonthWork + localMonthGame + localMonthOther;
@@ -120,30 +150,64 @@ window.addEventListener('load', function() {
 		document.querySelector('#module-pomodoro-work-month-percentage').innerText = (localMonthWork/monthTotal*100).toFixed(1) + '%';
 		document.querySelector('#module-pomodoro-game-month-percentage').innerText = (localMonthGame/monthTotal*100).toFixed(1) + '%';
 		document.querySelector('#module-pomodoro-other-month-percentage').innerText = monthOtherPercent + '%';
+		document.querySelector('#module-pomodoro-videos-month-percentage').innerText = (localMonthVideo/monthTotal*100).toFixed(1) + '%';
 	}, 1000);
 
+	function disableTimers() {
+		currentMode = MODE_ENUM.NONE;
+
+		document.querySelector('#module-pomodoro-work').innerHTML = '&#9654;';
+		document.querySelector('#module-pomodoro-game').innerHTML = '&#9654;';
+		document.querySelector('#module-pomodoro-other').innerHTML = '&#9654;';
+	}
+
 	document.querySelector('#module-pomodoro-work').addEventListener('click', function() {
-		currentMode = 0;
+		if(currentMode === MODE_ENUM.WORK) {
+			disableTimers();
+			return;
+		}
+
+		currentMode = MODE_ENUM.WORK;
 
 		document.querySelector('#module-pomodoro-work').innerHTML = '&#x25b7;';
-		document.querySelector('#module-pomodoro-game').innerHTML = '&#9654';
-		document.querySelector('#module-pomodoro-other').innerHTML = '&#9654';
+		document.querySelector('#module-pomodoro-game').innerHTML = '&#9654;';
+		document.querySelector('#module-pomodoro-other').innerHTML = '&#9654;';
 	});
 
 	document.querySelector('#module-pomodoro-game').addEventListener('click', function() {
-		currentMode = 1;
+		if(currentMode === MODE_ENUM.GAME) {
+			disableTimers();
+			return;
+		}
 
-		document.querySelector('#module-pomodoro-work').innerHTML = '&#9654';
+		currentMode = MODE_ENUM.GAME;
+
+		document.querySelector('#module-pomodoro-work').innerHTML = '&#9654;';
 		document.querySelector('#module-pomodoro-game').innerHTML = '&#x25b7;';
-		document.querySelector('#module-pomodoro-other').innerHTML = '&#9654';
+		document.querySelector('#module-pomodoro-other').innerHTML = '&#9654;';
 	});
 
 	document.querySelector('#module-pomodoro-other').addEventListener('click', function() {
-		currentMode = -1;
+		if(currentMode === MODE_ENUM.OTHER) {
+			disableTimers();
+			return;
+		}
 
-		document.querySelector('#module-pomodoro-work').innerHTML = '&#9654';
-		document.querySelector('#module-pomodoro-game').innerHTML = '&#9654';
+		currentMode = MODE_ENUM.OTHER;
+
+		document.querySelector('#module-pomodoro-work').innerHTML = '&#9654;';
+		document.querySelector('#module-pomodoro-game').innerHTML = '&#9654;';
 		document.querySelector('#module-pomodoro-other').innerHTML = '&#x25b7;';
+	});
+
+	document.querySelector('#module-pomodoro-videos').addEventListener('click', function() {
+		if(videoOn) {
+			videoOn = false;
+			document.querySelector('#module-pomodoro-videos').innerHTML = '&#9654;';
+		} else {
+			videoOn = true;
+			document.querySelector('#module-pomodoro-videos').innerHTML = '&#x25b7;';
+		}
 	});
 
 	createChart();
