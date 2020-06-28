@@ -28,6 +28,7 @@ global.createWindow = function(title,
 		//icon: './img/icon.png',
 		webPreferences: {
 			nodeIntegration: true,
+			enableRemoteModule: true,
 		},
 		title,
 	};
