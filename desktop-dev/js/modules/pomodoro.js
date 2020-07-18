@@ -28,6 +28,7 @@ window.addEventListener('load', function() {
 			workTime: localStorage.workTime,
 			gameTime: localStorage.gameTime,
 			otherTime: localStorage.otherTime,
+			videoTime: localStorage.videoTime,
 		};
 
 		localStorage.history = JSON.stringify(history);
