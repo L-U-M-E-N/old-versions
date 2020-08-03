@@ -1,0 +1,11 @@
+{
+	"name": "lumen",
+	"version": "1.0.0",
+	"main": "main.js",
+	"scripts": {
+		"start": "powershell -WindowStyle Hidden \"exit\" && electron --enable-logging .",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Elanis (Axel Soupé)",
+	"license": "ISC"
+}
