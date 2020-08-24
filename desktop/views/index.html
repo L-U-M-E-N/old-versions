@@ -30,10 +30,77 @@
 
 				<audio id="audio" src="" controls />
 			</div>
+
+			<div class="module module-pomodoro">
+				<table>
+					<b>Time management</b><br/>
+					<br/>
+
+					<tr>
+						<td></td>
+						<td></td>
+						<td>% day</td>
+						<td>% week</td>
+						<td>% month</td>
+					</tr>
+
+					<tr>
+						<td>Work</td>
+						<td rowspan="2"><span id="module-pomodoro-work">&#9654;</span></td>
+						<td rowspan="2" id="module-pomodoro-work-day-percentage">0%</td>
+						<td rowspan="2" id="module-pomodoro-work-week-percentage">0%</td>
+						<td rowspan="2" id="module-pomodoro-work-month-percentage">0%</td>
+					</tr>
+					<tr>
+						<td id="module-pomodoro-work-time">00:00:00</td>
+					</tr>
+
+					<tr>
+						<td>Game</td>
+						<td rowspan="2"><span id="module-pomodoro-game">&#9654;</span></td>
+						<td rowspan="2" id="module-pomodoro-game-day-percentage">0%</td>
+						<td rowspan="2" id="module-pomodoro-game-week-percentage">0%</td>
+						<td rowspan="2" id="module-pomodoro-game-month-percentage">0%</td>
+					</tr>
+					<tr>
+						<td id="module-pomodoro-game-time">00:00:00</td>
+					</tr>
+
+					<tr>
+						<td>Other</td>
+						<td rowspan="2"><span id="module-pomodoro-other">&#x25b7;</span></td>
+						<td rowspan="2" id="module-pomodoro-other-day-percentage">0%</td>
+						<td rowspan="2" id="module-pomodoro-other-week-percentage">0%</td>
+						<td rowspan="2" id="module-pomodoro-other-month-percentage">0%</td>
+					</tr>
+
+					<tr>
+						<td id="module-pomodoro-other-time">00:00:00</td>
+					</tr>
+
+					<tr>
+						<td>Videos/Series</td>
+						<td rowspan="2"><span id="module-pomodoro-videos">&#9654;</span></td>
+						<td rowspan="2" id="module-pomodoro-videos-day-percentage">0%</td>
+						<td rowspan="2" id="module-pomodoro-videos-week-percentage">0%</td>
+						<td rowspan="2" id="module-pomodoro-videos-month-percentage">0%</td>
+					</tr>
+
+					<tr>
+						<td id="module-pomodoro-videos-time">00:00:00</td>
+					</tr>
+				</table>
+				<br/>
+				<canvas id="pomodoro-chart" viewBox="0 0 440 220" style="width: 100%;"></canvas>
+			</div>
 		</div>
+
+		<script type="text/javascript" src="../js/chart.min.js"></script>
+		<script type="text/javascript" src="../js/chartjs-plugin-annotation.min.js"></script>
 
 		<script type="text/javascript" src="../js/main.js"></script>
 		<script type="text/javascript" src="../js/windows/index.js"></script>
 		<script type="text/javascript" src="../js/modules/music.js"></script>
+		<script type="text/javascript" src="../js/modules/pomodoro.js"></script>
 	</body>
 </html>

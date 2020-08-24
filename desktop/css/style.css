@@ -208,6 +208,17 @@ audio {
 }
 
 /**
+ * Pomodoro
+ */
+.module-pomodoro table, .module-pomodoro tbody {
+	width: 100%;
+}
+.module-pomodoro td {
+	width: 20%;
+}
+
+
+/**
  * Fenetre: musique
  */
 .main-music {
