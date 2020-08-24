@@ -1,15 +1,15 @@
 const remote = require('electron').remote;
 
-window.addEventListener('load', function() {
+window.addEventListener('load', () => {
 	const closebtn = document.querySelector('#window-close-button');
 
 	if(!closebtn) {
 		return;
 	}
 
-	closebtn.addEventListener('click', function() {
+	closebtn.addEventListener('click', () => {
 		if(typeof currentWindow === 'undefined') {
-			console.log('Impossible de connaitre la fenetre courant - abandon');
+			console.log('Unable to find current window - abort');
 			return;
 		}
 
@@ -20,19 +20,23 @@ window.addEventListener('load', function() {
 		}
 	});
 
-	document.addEventListener('keydown', function(e) {
-		if (e.which === 123) {
+	document.addEventListener('keydown', (e) => {
+		if (e.which === 116) { // F5
+			window.location.reload();
+		}
+
+		if (e.which === 123) { // F12
 			remote.getCurrentWindow().toggleDevTools();
 		}
 	});
 });
 
 const viewNames = {
-	music: 'Musique',
-	pictures: 'Images',
+	music: 'Music',
+	pictures: 'Pictures',
 };
 
-window.addEventListener('beforeunload', function() {
+window.addEventListener('beforeunload', () => {
 	remote.getGlobal('console').log('Closing ' + currentWindow);
 	remote.getGlobal('closeWindow')(viewNames[currentWindow]);
 });
