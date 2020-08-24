@@ -10,10 +10,27 @@
 			<span id="window-close-button">✕</span>
 		</div>
 
-		<h1>Hello World!</h1>
-		We are using node <script>document.write(process.versions.node)</script>,
-		Chrome <script>document.write(process.versions.chrome)</script>,
-		and Electron <script>document.write(process.versions.electron)</script>.
+		<div class="main"> 	
+			<div class="module module-music">
+				<span id="module-music-more">&equiv;</span>
+
+				<b>Music</b><br/>
+				<br/>
+				<span id="module-music-album"></span><br/>
+				<img id="module-music-img" src="" onError="this.src='G:/Musique/_icons/noimage.jpg';"><br/>
+				<span id="module-music-time">0:00/0:00</span><br/>
+				<span id="module-music-title">Empty playlist</span><br/><br/>
+				<span id="module-music-prev">◁◁</span>
+				<span id="module-music-playPause">▷</span>
+				<span id="module-music-next">▷▷</span><br/><br/>
+				<span id="module-music-decVol">&#128265;</span>
+				<span id="module-music-volume">50%</span>
+				<span id="module-music-incVol">&#128266;</span><br/><br/>
+				<span id="module-music-auto">Automatic playlist</span>
+
+				<audio id="audio" src="" controls />
+			</div>
+		</div>
 
 		<script type="text/javascript" src="../js/main.js"></script>
 		<script type="text/javascript" src="../js/windows/index.js"></script>
