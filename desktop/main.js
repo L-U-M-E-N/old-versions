@@ -1,9 +1,16 @@
+// Npm libs
 const { app, BrowserWindow, ipcMain } = require('electron');
 global.app = app;
 global.BrowserWindow = BrowserWindow;
 global.ipcMain = ipcMain;
 
+// Local libs
+global.fileScanner = require('./fileScanner');
+
 require('./windowManager');
+
+// Music
+require('./music');
 
 // Init app
 function init() {

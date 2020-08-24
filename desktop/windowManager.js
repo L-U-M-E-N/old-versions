@@ -2,8 +2,8 @@ const DEFAULT_WIDTH = 1366;
 const DEFAULT_HEIGHT = 768;
 
 global.window = {
-	Musique: false,
-	Images: false,
+	Music: false,
+	Pictures: false,
 };
 
 global.createWindow = function(title, documentURL, width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT, options={}) {
