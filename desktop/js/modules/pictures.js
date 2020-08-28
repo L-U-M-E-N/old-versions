@@ -1,4 +1,5 @@
 const picList = remote.getGlobal('pictureList');
+let timeoutDelay = -1;
 
 class Pictures {
 	static init() {
@@ -19,6 +20,9 @@ class Pictures {
 
 		const elt = tmpList[Math.floor(tmpList.length * Math.random())];
 		imgDOM.innerHTML = '<img src="' + Pictures.normalizeFileName(elt) + '">';
+
+		clearTimeout(timeoutDelay);
+		timeoutDelay = setTimeout(() => { drawRandomImg(imgDOM); }, 15*60*1000);
 	}
 
 	static normalizeFileName(fname) {
