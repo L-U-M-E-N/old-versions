@@ -12,6 +12,9 @@ require('./windowManager');
 // Music
 require('./music');
 
+// Pictures
+require('./pictures');
+
 // Init app
 function init() {
 	global.mainWindow = createWindow('Projet L.U.M.E.N - Learned United Machines of Elanis Network', 'views/index.html', 1920, 1080);

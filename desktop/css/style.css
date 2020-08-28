@@ -312,3 +312,11 @@ audio {
 
 	outline: none;
 }
+
+/**
+ * Module pictures
+ */
+.module-pictures img {
+	max-width: 100%;
+	max-height: 50vh;
+}
