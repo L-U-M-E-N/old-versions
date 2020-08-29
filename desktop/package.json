@@ -4,7 +4,12 @@
 	"main": "main.js",
 	"scripts": {
 		"start": "powershell -WindowStyle Hidden \"exit\" && electron .",
+		"build": "electron-packager \".\" \"Project L.U.M.E.N.\" --production -–asar=true --prune=true --overwrite --platform=win32 --arch=x64 --icon=\"img/icon.png\" --out=\"build/\" --version-string.CompanyName=\"Elanis\" --version-string.FileDescription=\"\" --version-string.ProductName=\"Project L.U.M.E.N.\"",
 		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"devDependencies": {
+		"electron": "^9.1.2",
+		"electron-packager": "^15.0.0"
 	},
 	"author": "Elanis (Axel Soupé)",
 	"license": "ISC"
