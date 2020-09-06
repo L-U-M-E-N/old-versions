@@ -22,7 +22,7 @@ class Pictures {
 		imgDOM.innerHTML = '<img src="' + Pictures.normalizeFileName(elt) + '">';
 
 		clearTimeout(timeoutDelay);
-		timeoutDelay = setTimeout(() => { drawRandomImg(imgDOM); }, 15*60*1000);
+		timeoutDelay = setTimeout(() => { Pictures.drawRandomImg(imgDOM); }, 15*60*1000);
 	}
 
 	static normalizeFileName(fname) {
