@@ -288,7 +288,7 @@ function createChart() {
 		data: {
 			labels: dates,
 			datasets: [{
-				label: 'Travail',
+				label: 'Work',
 				fill: true,
 				backgroundColor: '#2980b9',
 				pointBackgroundColor: '#3498db',
@@ -298,7 +298,7 @@ function createChart() {
 				data: workStats,
 
 			}, {
-				label: 'Autre',
+				label: 'Other',
 				fill: true,
 				backgroundColor: '#27ae60',
 				pointBackgroundColor: '#2ecc71',
@@ -307,7 +307,7 @@ function createChart() {
 				borderCapStyle: 'butt',
 				data: otherStats,
 			}, {
-				label: 'Jeux',
+				label: 'Game',
 				fill: true,
 				backgroundColor: '#c0392b',
 				pointBackgroundColor: '#e74c3c',
